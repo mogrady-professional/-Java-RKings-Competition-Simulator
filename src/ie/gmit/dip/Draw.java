@@ -1,5 +1,6 @@
 package ie.gmit.dip;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Draw {
@@ -10,6 +11,8 @@ public class Draw {
 	private static boolean sufficientFunds;
 	private static int ticketQuantity;
 	private static int MAX_RANGE;
+	private static ArrayList<Integer> userTicketNumbers;
+	private static ArrayList<Integer> entryList;
 
 	public static void TodaysDraw() {
 
@@ -63,7 +66,8 @@ public class Draw {
 					// Sufficient funds to proceed
 					System.out.println("Success");
 					
-					Random.generateDrawNumbers(MAX_RANGE, ticketQuantity);
+					// Generate x number of tickets for the user (within the range)
+					userTicketNumbers = Random.generateUserTickets(MAX_RANGE, ticketQuantity);
 
 				} else {
 					// Invalid
@@ -77,7 +81,12 @@ public class Draw {
 				System.out.println("User decided to decline to participate in the draws this time...");
 				System.out.println("Exiting...");
 				System.exit(0);
+			} else {
+				System.out.println("Invalid entry: " +choice);
 			}
+			
+			
+			runDraw(MAX_RANGE);
 
 		}
 	}
@@ -134,24 +143,34 @@ public class Draw {
 		return MAX_RANGE;
 	}
 
-//	private static int GetRange() {
-//
-//		private int MAX_RANGE;
-//		
-//		
-//		
-//		
-//		
-//		return MAX_RANGE;
-//		
-//	}
-
-	// Ask the user how many tickets do they wish to purchase
 	private static int GetUserTicketChoice(char drawChoice2) {
 		System.out.println("How many tickets do you wish to puchase for the draw:" + drawChoice2 + " ?");
 		int ticketQuantity = sc.nextInt();
 		return ticketQuantity;
 
+	}
+	
+	private static void runDraw(int mAX_RANGE2) {
+		int winningNumber;
+		entryList = Random.generateDrawNumbers(mAX_RANGE2);
+		// Generate Random Winning Number between the max range and 1
+		winningNumber = Random.drawNumber(mAX_RANGE2);
+		// Print the Winning number to the console
+		System.out.println("[Winning Number] " + winningNumber);
+
+		// check the tickets for the winning number, take in the generatedTicketNumbers, the winningNumber and the complete list of tickets
+		checkTickets(userTicketNumbers, winningNumber, entryList);
+	}
+	
+	// Check if the winning number existed within the array of generated numbers
+	private static void checkTickets(ArrayList<Integer> numberList2, int winningNumber, ArrayList<Integer> entryList2) {
+		System.out.println("Checking your tickets...");	
+		
+		// For each integer in the ArrayList of 
+//		for (Integer n : numberList2) {
+//			System.out.println(n);
+//			
+//		}
 	}
 
 }
