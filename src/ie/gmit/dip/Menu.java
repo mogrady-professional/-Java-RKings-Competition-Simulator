@@ -40,4 +40,12 @@ public class Menu {
 		}
 
 	}
+
+//	private double getBankBalance() {
+//		double currentBalance = Bank.getBalance();
+//		return currentBalance;
+//	}
+
+
+
 }
