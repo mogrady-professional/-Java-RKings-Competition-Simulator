@@ -40,7 +40,7 @@ public class Random {
 
 //		Collections.shuffle(numberList);
 
-//		numberList.sort(null); // Sort numbers to draw in ascending order
+		numberList.sort(null); // Sort numbers to draw in ascending order
 
 		// print each number to the console
 		System.out.println("[USER-TICKETS->>>>] " + numberList);
@@ -77,7 +77,7 @@ public class Random {
 		Collections.shuffle(draw);
  
 
-//		numberList.sort(null); // Sort numbers in ascending order
+//		draw.sort(null); // Sort numbers in ascending order
 
 		System.out.println("[DRAW-LIST->>>>] " + draw);
 		
