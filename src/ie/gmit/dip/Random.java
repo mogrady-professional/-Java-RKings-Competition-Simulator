@@ -72,8 +72,8 @@ public class Random {
 		for (int i = 1; i <= mAX_RANGE2; i++) {
 			// add each number in the list
 			draw.add(i);
-			// shuffle the numbers
 		} 
+		// shuffle the numbers
 		Collections.shuffle(draw);
  
 

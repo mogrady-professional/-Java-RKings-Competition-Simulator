@@ -11,8 +11,8 @@ public class Bank {
 	public static double getBalance() {
 				
 		// return single number as balance between 1 and 1000
-//		bankBalance =  Random.GenerateBankBalanceMaxOneThousand();
-		bankBalance = 100;
+		bankBalance =  Random.GenerateBankBalanceMaxOneThousand();
+//		bankBalance = 13;
 		
 		// Run credit check on client
 		boolean creditCheckResult = creditCheck(bankBalance);

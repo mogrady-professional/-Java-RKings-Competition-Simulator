@@ -11,7 +11,7 @@ public class Draw {
 	private static double balanceAfterPurchase;
 	private static int ticketQuantity;
 	private static int MAX_RANGE;
-	private static ArrayList<Integer> userTicketNumbers;
+//	private static ArrayList<Integer> userTicketNumbers;
 	private static ArrayList<Integer> entryList;
 	private static int counter;
 	private static double result;
@@ -47,100 +47,9 @@ public class Draw {
 	}
 	
 	public static void verify() {
-		
 		// verify the user can awford the tickets
 		
 		
-		
-		
-	}
-
-	public static boolean TodaysDraw2() {
-
-		sc = new Scanner(System.in);
-		char choice = sc.next().charAt(0);
-
-		boolean invalid = true;
-		while (invalid) {
-
-			if (choice == 'y' || choice == 'Y') {
-				invalid = false;
-
-				// Get the user's current balance
-//				currentBalance = (double) Bank.getBalance(); // returns double bankBalance
-
-				// get draw choice (a, b, c or d)
-				drawChoice = ChooseDraw(); // -> Returns choice (char)
-
-				// Show user their bank balance
-//				System.out.println("You balance is: £" + currentBalance);			
-
-				// get the ticket price based on the drawChoice -> Returns ticketPrice (double)
-				ticketPrice = GetTicketPrice(drawChoice);
-
-//				if()
-
-				// Get the draw size to return MAX_RANGE for tickets
-				MAX_RANGE = getTicketRange(drawChoice); // returns double MAX_RANGE
-
-				// Find out how many tickets the user wishes to purchase -> returns int
-				// ticketQuantity
-				ticketQuantity = GetUserTicketChoice(drawChoice);
-
-				// get ticket quantity and determine max ticket quantity
-				
-				
-				
-				if (ticketQuantity <= MAX_RANGE) {
-					// Valid
-					// Tickets can be bought within this range
-
-					// Check if the user has sufficient funds to buy the ticketQuantity -> returns
-					// boolean
-
-					balanceAfterPurchase = Bank.runBalanceCheck(currentBalance, ticketPrice, drawChoice,
-							ticketQuantity);
-
-					result = (double) (currentBalance - balanceAfterPurchase);
-
-					System.out.println("Balance after purchase £" + result);
-					System.out.println("Current Balance->> " + currentBalance);
-					System.out.println("Result ->>>> " + result);
-
-//					while( result)
-
-//					while(result < 0) {
-//						// Rerun if balance is less than the requested tickets
-//						ticketQuantity = GetUserTicketChoice(drawChoice);
-//						balanceAfterPurchase = Bank.runBalanceCheck(currentBalance, ticketPrice, drawChoice,
-//								ticketQuantity);
-//					}
-
-					// Sufficient funds to proceed
-//					System.out.println("Payment success...\nRunning Draw...");
-
-				} else {
-					// Invalid
-					// Cannot over purchase tickets for competition
-					System.out.println("Cannot over purchase tickets for the competition...");
-					invalid = false;
-					System.exit(0);
-//					return;
-				}
-
-			} else if (choice == 'n' || choice == 'N') {
-				invalid = false;
-//					user returned false -> exiting the application
-				System.out.println("User decided to decline to participate in the draws this time...");
-				System.out.println("Exiting...");
-				System.exit(0);
-			} else {
-				System.out.println("Invalid entry: " + choice);
-			}
-//			runDraw(MAX_RANGE);
-
-		}
-		return result;
 	}
 
 	// User is asked for draw choice -> set ticket price
@@ -219,18 +128,20 @@ public class Draw {
 	}
 
 	public static int GetUserTicketChoice(char drawChoice2, double awfordDraw) {
-		System.out.println("How many tickets do you wish to puchase for the draw: " + drawChoice2 + " ? \n Remember, you can only awford [" + awfordDraw + "] tickets.");
-		int ticketQuantity = sc.nextInt();
+		int ticketQuantity;
+		if(awfordDraw == 0) {
+			System.out.println("Sorry you cannot awford to purchase a ticket for this draw...");
+			ticketQuantity = 0;
+		}else {
+			System.out.println("How many tickets do you wish to puchase for the draw: " + drawChoice2 + " ?");
+			System.out.println("You can awford [" + awfordDraw + "] tickets.");
+			ticketQuantity = sc.nextInt();
+		}
 		return ticketQuantity;
 	}
 	
-	public static void runCheck() {
-		
-		
-		
-	}
 
-	private static void runDraw(int mAX_RANGE2) {
+	public static void runDraw(int mAX_RANGE2, ArrayList<Integer> userTickets, double ticketPrice) {
 		int winningNumber;
 		entryList = Random.generateDrawNumbers(mAX_RANGE2);
 		// Generate Random Winning Number between the max range and 1
@@ -240,11 +151,11 @@ public class Draw {
 
 		// check the tickets for the winning number, take in the generatedTicketNumbers,
 		// the winningNumber and the complete list of tickets
-		checkTickets(userTicketNumbers, winningNumber, entryList);
+		checkTickets(ticketPrice, userTickets, winningNumber, entryList);
 	}
 
 	// Check if the winning number existed within the array of generated numbers
-	private static void checkTickets(ArrayList<Integer> userTicketNumbers, int winningNumber,
+	private static void checkTickets(double ticketPrice, ArrayList<Integer> userTickets, int winningNumber,
 			ArrayList<Integer> entryList) {
 		System.out.println("Checking your tickets...");
 		boolean numberDrawn = false;
@@ -254,17 +165,19 @@ public class Draw {
 
 			// for each possible ticket in the entryList -> (you can't possibly draw more
 			// tickets than the maximum allowed in the competition in order to win)
-			for (int i = 0; i < entryList.size(); i++) {
+			for (int i = 0; i < entryList.size();) {
 				// Increment count
 				counter++;
-				if (userTicketNumbers.contains(winningNumber)) {
+				double totalCost = (double) (ticketPrice * counter);
+				
+				if (userTickets.contains(winningNumber)) {
 					// the winning number IS contained within the usersTicketNumbers
 
 					// True win ->
-					if (userTicketNumbers.contains(winningNumber) && counter <= userTicketNumbers.size()) {
+					if (userTickets.contains(winningNumber) && counter <= userTickets.size()) {
 						System.out.println("Correct! Well done.");
 						System.out.println("One of your number(s) was drawn, number: [" + winningNumber
-								+ "] and it took [" + counter + "] draws.");
+								+ "] and it took [" + counter + "] draws and cost you £" +totalCost);
 						numberDrawn = true;
 						return;
 
@@ -273,29 +186,28 @@ public class Draw {
 					// but number was drawn eventually at a finite cost.
 
 					// the winning number is contained within the usersTicketNumbers
-//    				System.out.println("One of your numbers was drawn, number: [" + winningNumber + "] however, it took [" + counter + "] draws and cost you: £" + bankBalance);
-
-//					System.out.println("Your bank balance is now £" + transaction);
+					System.out.println("Sorry you did not win.");
+    				System.out.println("However, one of your numbers was eventually drawn, number: [" + winningNumber + "] but it took [" + counter + "] draws and would have cost you: £"+totalCost);
 
 					numberDrawn = true;
 					return;
 				} else {
-//    				// the winning number is NOT contained within the usersTicketNumbers
-					System.out.println("Winning number is [" + winningNumber
-							+ "] and is NOT contained within the users TicketNumbers");
+//    				// the winning number is NOT contained within the usersTicketNumbers -> but must be drawn eventually (the users numbers do not change & random number is always generated within the range)
+					System.out.println("Draw #[" + counter + "] " + "Winning number is [" + winningNumber
+							+ "] and is NOT contained within the users TicketNumbers" +userTickets);
 
 					// Redraw -> Pull another number within the range of the draw until a number
 					// from the users range of tickets is chosen
 					winningNumber = Random.drawNumber(MAX_RANGE);
 
 					// check against users tickets
-					checkTickets(userTicketNumbers, winningNumber, entryList);
+//					checkTickets(ticketPrice, userTickets, winningNumber, entryList);
 					// Increment count
-					return;
+//					return;
 				}
 			}
+			numberDrawn = true;
 		}
-		System.out.println("Count ->>>>" + counter);
 
 		// For each integer in the ArrayList of
 //		for (Integer n : numberList2) {
