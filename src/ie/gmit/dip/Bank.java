@@ -5,22 +5,37 @@ public class Bank {
 	private static double ticketCost;
 	private static int maxBuys;
 	private static double MIN_BALANCE = 2.50;
-	
-	
+
 	// Return a bank balance
 	public static double getBalance() {
-				
+
 		// return single number as balance between 1 and 1000
-		bankBalance =  Random.GenerateBankBalanceMaxOneThousand();
+		bankBalance = Random.GenerateBankBalanceMaxOneThousand();
 //		bankBalance = 13;
-		
+
 		// Run credit check on client
 		boolean creditCheckResult = creditCheck(bankBalance);
-		
-		if(creditCheckResult) {			
+
+		if (creditCheckResult) {
+			System.out.println("Balance passes credit check...");
 			return bankBalance;
 		}
-		
+		System.out.println("Balance fails credit check...");
+		return 0;
+	}
+
+	// Specify a bank balance
+	public static double specifyBalance(double balance) {
+		// assign users balance
+		// Run credit check on client
+		boolean creditCheckResult = creditCheck(balance);
+
+		if (creditCheckResult) {
+			System.out.println("Balance passes credit check...");
+			System.out.println("Balance = £"+balance);
+			return balance;
+		}
+		System.out.println("Balance fails credit check...");
 		return 0;
 	}
 
@@ -31,7 +46,6 @@ public class Bank {
 		}
 		return false;
 	}
-	
 
 	public static double runBalanceCheck(double currentBalance, double ticketPrice, char drawChoice,
 			int ticketQuantity) {

@@ -6,16 +6,10 @@ import java.util.Scanner;
 public class Draw {
 	private static Scanner sc;
 	private static double ticketPrice;
-	private static char drawChoice;
-	private static double currentBalance;
-	private static double balanceAfterPurchase;
-	private static int ticketQuantity;
 	private static int MAX_RANGE;
-//	private static ArrayList<Integer> userTicketNumbers;
 	private static ArrayList<Integer> entryList;
 	private static int counter;
-	private static double result;
-
+	
 	public static boolean TodaysDraw() {
 		System.out.println("Welcome to RKing Competitions...\n");
 		System.out.println("The following draws are currently available: ");
@@ -45,12 +39,6 @@ public class Draw {
 		}
 		return false;
 	}
-	
-	public static void verify() {
-		// verify the user can awford the tickets
-		
-		
-	}
 
 	// User is asked for draw choice -> set ticket price
 	public static char ChooseDraw() {
@@ -73,7 +61,7 @@ public class Draw {
 		return 0;
 	}
 
-	public static double GetTicketPrice(char draw) {
+	public static double GetTicketPrice(char draw, double currentBalance2) {
 		char decision;
 		// TODO Auto-generated method stub
 		// Assign the ticket price amount based on the user selected draw
@@ -86,7 +74,7 @@ public class Draw {
 		default -> throw new IllegalArgumentException("Unexpected value: " + draw);
 		}
 //		System.out.println("[Ticket Price] for draw: " + draw + " is £" + ticketPrice);
-		System.out.println("It costs [£" + ticketPrice + "] for 1 ticket. Do you wish to continue [?]");
+		System.out.println("It costs [£" + ticketPrice + "] for [1] ticket. Your balance is: [£" + currentBalance2 + "] Do you wish to continue [?]");
 		System.out.println("Please enter [y] or [n]");
 		decision = sc.next().charAt(0);
 
@@ -157,6 +145,8 @@ public class Draw {
 	// Check if the winning number existed within the array of generated numbers
 	private static void checkTickets(double ticketPrice, ArrayList<Integer> userTickets, int winningNumber,
 			ArrayList<Integer> entryList) {
+		double totalCost = (double) (ticketPrice * userTickets.size());
+		int numberOfTickets = (int) (userTickets.size());
 		System.out.println("Checking your tickets...");
 		boolean numberDrawn = false;
 
@@ -168,7 +158,7 @@ public class Draw {
 			for (int i = 0; i < entryList.size();) {
 				// Increment count
 				counter++;
-				double totalCost = (double) (ticketPrice * counter);
+				double winCost = (double) (ticketPrice * counter);
 				
 				if (userTickets.contains(winningNumber)) {
 					// the winning number IS contained within the usersTicketNumbers
@@ -177,7 +167,7 @@ public class Draw {
 					if (userTickets.contains(winningNumber) && counter <= userTickets.size()) {
 						System.out.println("Correct! Well done.");
 						System.out.println("One of your number(s) was drawn, number: [" + winningNumber
-								+ "] and it took [" + counter + "] draws and cost you £" +totalCost);
+								+ "] and it took [" + counter + "] draws at a cost of £" +winCost + ". However you spent a total of £" + totalCost + " on " + numberOfTickets + " tickets for this draw.");
 						numberDrawn = true;
 						return;
 
@@ -187,7 +177,7 @@ public class Draw {
 
 					// the winning number is contained within the usersTicketNumbers
 					System.out.println("Sorry you did not win.");
-    				System.out.println("However, one of your numbers was eventually drawn, number: [" + winningNumber + "] but it took [" + counter + "] draws and would have cost you: £"+totalCost);
+    				System.out.println("However, one of your numbers was eventually drawn, number: [" + winningNumber + "] but it took [" + counter + "] draws and would have cost you: £"+winCost);
 
 					numberDrawn = true;
 					return;
@@ -199,22 +189,10 @@ public class Draw {
 					// Redraw -> Pull another number within the range of the draw until a number
 					// from the users range of tickets is chosen
 					winningNumber = Random.drawNumber(MAX_RANGE);
-
-					// check against users tickets
-//					checkTickets(ticketPrice, userTickets, winningNumber, entryList);
-					// Increment count
-//					return;
 				}
 			}
 			numberDrawn = true;
 		}
-
-		// For each integer in the ArrayList of
-//		for (Integer n : numberList2) {
-//			System.out.println(n);
-//			
-//		}
-
 	}
 
 }
