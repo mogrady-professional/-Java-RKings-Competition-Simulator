@@ -10,7 +10,7 @@ public class Bank {
 	public static double getBalance() {
 
 		// return single number as balance between 1 and 1000
-		bankBalance = Random.GenerateBankBalanceMaxOneThousand();
+		bankBalance = Random.randomBankBalance();
 //		bankBalance = 13;
 
 		// Run credit check on client
@@ -58,7 +58,7 @@ public class Bank {
 
 		if (ticketCost > currentBalance) {
 			// Rerun loop
-			System.out.println("You have insufficient funds. You can only afford to buy " + maxBuys
+			System.out.println("[i] You have insufficient funds. You can only afford to buy " + maxBuys
 					+ " tickets. Please choose less tickets next time.");
 		} else {
 			System.out.println("You have sufficient funds to purchase the tickets...");

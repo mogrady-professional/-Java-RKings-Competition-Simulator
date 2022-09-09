@@ -9,10 +9,10 @@ public class Menu {
 
 	public void MainMenu() {
 		sc = new Scanner(System.in);
-		Options();
+		options();
 	}
 
-	private void Options() { 
+	private void options() { 
 		System.out
 				.println("******************************************************************************************");
 		System.out
@@ -36,20 +36,20 @@ public class Menu {
 
 		// Ask the user if they wish to do a custom draw
 		System.out.println("Do you wish to run an (a)utomated draw with specified prizes? Or a (c)ustom draw where you specify the:\nMax Entries, Ticket Quantity and Ticket Price? ");
-		System.out.println("Please enter (c)ustom or (a)utomated");
+		System.out.println("[>] Please enter (c)ustom or (a)utomated");
 
-		char choice =  sc.next().charAt(0); 
+		char choice =  sc.next().toLowerCase().charAt(0); 
 		
-		if (choice == 'c' || choice == 'C') {
+		if (choice == 'c') {
 			// Run custom draw
 			System.out.println("Custom Draw Selected...");
 			customDraw();
-		}else if (choice == 'a' || choice == 'a') {
+		}else if (choice == 'a') {
 			System.out.println("Automated Draw Selected...");
 			this.getUserChoice();
 		}else {
 			System.out.println("Invalid choice, please try again.");
-			this.Options(); // Recall function
+			this.options(); // Recall function
 		}	 
 	}
 
@@ -60,8 +60,8 @@ public class Menu {
 		// Initialize initialBalanceCheckWithBank as false (0)
 		double initialBalanceCheckWithBank = 0;
 
-		char choice = sc.next().charAt(0);
-		if (choice == 'y' || choice == 'Y') {
+		char choice = sc.next().toLowerCase().charAt(0);
+		if (choice == 'y') {
 
 			// give the user the option to provide a bank balance or get a random balance;
 			boolean randomBalance = manageBalance();
@@ -92,7 +92,7 @@ public class Menu {
 				checkDraw(currentBalance);
 			}
 
-		} else if (choice == 'n' || choice == 'N') {
+		} else if (choice == 'n') {
 			System.out.println("User decided to decline to participate in the draws this time...");
 			System.out.println("Exiting...");
 			System.exit(0);
@@ -180,7 +180,7 @@ public class Menu {
 		// If the number is a negative number... decline transaction, otherwise it's approved
 		if (result < 0) {
 			System.out.println("This would have put you in debt to the tune of £" + result);
-			System.out.println("The bank has declined your transaction");
+			System.out.println("[i] The bank has declined your transaction");
 
 		} else if (result > 0) {
 			System.out.println("The bank has approved your transaction");
@@ -206,14 +206,14 @@ public class Menu {
 		// Present the user with the option to run another draw with their balance provided the user has a positive balance remaining
 		if (rollingBalance > 0) {
 			System.out.println(
-					"\nYou still have £" + result + " money remaining would you like to do another draw[?]");
-			System.out.println("Enter (y)es or (n)o [>]");
-			char choice = sc.next().charAt(0);
-			if (choice == 'y' || choice == 'Y') {
+					"\n[i] You still have £" + result + " money remaining would you like to do another draw[?]");
+			System.out.println("[>] Enter (y)es or (n)o [>]");
+			char choice = sc.next().toLowerCase().charAt(0);
+			if (choice == 'y') {
 				// User wants another draw
 //				Recall function
 				checkDraw(rollingBalance);
-			} else if (choice == 'n' || choice == 'N') {
+			} else if (choice == 'n') {
 				// User wishes to quit
 				System.out.println("Smart choice... try again another time!\nThank you for participating.");
 			} else {
@@ -236,14 +236,14 @@ public class Menu {
 		// ask the user if they wish to be assigned a random bank balance or specify
 		// their balance
 		System.out.println("Would you like to be assigned a random bank balance, or specify your bank balance?");
-		System.out.println("Enter (r)andom or (s)pecify your balance");
+		System.out.println("[>] Enter (r)andom or (s)pecify your balance");
 
-		choice = sc.next().charAt(0);
+		choice = sc.next().toLowerCase().charAt(0);
 
-		if (choice == 'r' || choice == 'R') {
+		if (choice == 'r') {
 			// User wants a random balance
 			return true;
-		} else if (choice == 's' || choice == 'S') {
+		} else if (choice == 's') {
 			// User wishes to specify their balance
 			return false;
 		} else {
@@ -254,33 +254,24 @@ public class Menu {
 		return false;
 	}
 	
-	// Let the user input their own values
-	// -> MAX_ENTRIES
-	// -> TICKET_PRICE
-	// -> NUMBER_OF_TICKETS
-	
 	private static void customDraw() {
 		int maxTickets;
 		int ticketQuantity;
 		double ticketPrice;
 		
-		System.out.println("Enter the MAX number of entries (i.e. 4995 [>]");		
+		System.out.println("[>] Enter the MAX number of entries (e.g. 4995)");		
 		maxTickets = sc.nextInt();
 		
-		// set limit to 2,500,000
-		if(maxTickets >= 2500000) {
-			System.out.println("");
-		}
-		
+		// set limit to 2,500,000	
 		while (maxTickets >=2500000 ) {
 			System.out.println("Draw Limit set at 2500000. Please enter less than this number.");
 			maxTickets = sc.nextInt();
 		}
 		
 		
-		System.out.println("Enter the PRICE per ticket [>}");
+		System.out.println("[>] Enter the PRICE per ticket");
 		ticketPrice = sc.nextInt();
-		System.out.println("Enter the AMOUNT of Tickets you want to enter [>}");
+		System.out.println("[>] Enter the AMOUNT of Tickets you want to enter [>}");
 		ticketQuantity = sc.nextInt();
         // close the scanner
         sc.close();

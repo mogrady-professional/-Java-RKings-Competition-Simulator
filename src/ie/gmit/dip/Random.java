@@ -4,14 +4,28 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Random {
-
+	private static final double MAX_RANDOM_BALANCE = 1000;
+	
+	
+	
+	
 // Generate a random number between 1 and 1000
-	public static int GenerateBankBalanceMaxOneThousand() {
-		int number = (int) ((Math.random() * (1000 - 1)) + 1); // integer value between 1 and 1000
+	public static int randomBankBalance() {
+		int number = (int) ((Math.random() * (MAX_RANDOM_BALANCE - 1)) + 1); // integer value between 1 and 1000
 		System.out.println("[Random] Random Bank Balance: £" + number);
 		return number;
 
 	}
+	
+	
+	public static int generateWinner(int MAX_TICKETS) {
+		double winner = (int) ((Math.random() * (MAX_TICKETS - 1)) + 1); // integer value between 1 and MAX_TICKETS
+//		System.out.println("[Random] Random Bank Balance: £" + number);
+		return (int) winner;		
+	}
+	
+	
+	
 
 	// Generate ticket numbers for the user
 	public static ArrayList<Integer> generateUserTickets(int maxTickets, int ticketQuantity) {

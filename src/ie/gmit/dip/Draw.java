@@ -19,16 +19,16 @@ public class Draw {
 		System.out.println("d) 34999 tickets	Nissan R35 GTR JDM 800bhp				£1.99");
 		System.out.println("e) 44999 tickets	£125,000 or Stunning Ferrari 488  			£4.99\n");
 	
-		System.out.println("Do you wish to enter any of the competitions? \nEnter (y)es to play or (n)o to pass...");
-		char choice = sc.next().charAt(0);
+		System.out.println("Do you wish to enter any of the competitions? \n[>] Enter (y)es to play or (n)o to pass...");
+		char choice = sc.next().toLowerCase().charAt(0);
 		
 		boolean invalid = true;
 
 		while (invalid) {
-			if (choice == 'y' || choice == 'Y') {
+			if (choice == 'y') {
 				invalid = false;
 				return true;
-			} else if (choice == 'n' || choice == 'N') {
+			} else if (choice == 'n') {
 				invalid = false;
 				return false;
 			} else {
@@ -42,7 +42,7 @@ public class Draw {
 
 	// User is asked for draw choice -> set ticket price
 	public static char ChooseDraw() {
-		System.out.println("Enter (a), (b), (c), (d) or (e)");
+		System.out.println("[>] Enter (a), (b), (c), (d) or (e)");
 		boolean invalid = true;
 		char draw = sc.next().toLowerCase().charAt(0);
 
@@ -75,20 +75,20 @@ public class Draw {
 		}
 //		System.out.println("[Ticket Price] for draw: " + draw + " is £" + ticketPrice);
 		System.out.println("It costs [£" + ticketPrice + "] for [1] ticket. Your balance is: [£" + currentBalance2 + "] Do you wish to continue [?]");
-		System.out.println("Please enter (y)es or (n)o");
-		decision = sc.next().charAt(0);
+		System.out.println("[>] Please enter (y)es or (n)o");
+		decision = sc.next().toLowerCase().charAt(0);
 
-		if (decision == 'y' || decision == 'Y') {
+		if (decision == 'y') {
 			System.out.println("User has agreed to proceed with this draw...");
 			return ticketPrice;
 		} else if (decision == 'n' || decision == 'N') {
 			System.out.println("Would you like to choose another draw instead [?]");
 			System.out.println("Please enter  (y)es or (n)o");
-			decision = sc.next().charAt(0);
-			if (decision == 'y' || decision == 'Y') {
+			decision = sc.next().toLowerCase().charAt(0);
+			if (decision == 'y') {
 				System.out.println("User would like to participate in another draw instead...");
 				ChooseDraw();
-			} else if (decision == 'n' || decision == 'N') {
+			} else if (decision == 'n') {
 				System.out.println("User decided not to proceed with the draws at this time...");
 				System.out.println("Exiting...");
 				System.exit(0);
@@ -124,7 +124,7 @@ public class Draw {
 			ticketQuantity = 0;
 		}else {
 			System.out.println("How many tickets do you wish to puchase for the draw: [" + drawChoice2 + "] ?");
-			System.out.println("[i] You can afford [" + affordDraw + "] tickets.\nEnter number of tickets:");
+			System.out.println("[i] You can afford [" + affordDraw + "] tickets.\n[>] Enter number of tickets:");
 			ticketQuantity = sc.nextInt();
 		}
 		return ticketQuantity;
@@ -177,6 +177,12 @@ public class Draw {
 		
 		
 		System.out.println("Total time (ms): " + (System.currentTimeMillis() - userTicketGenerationTime));
+		try {
+			Thread.sleep(4000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 
@@ -226,8 +232,8 @@ public class Draw {
 					// but number was drawn eventually at a finite cost.
 
 					// the winning number is contained within the usersTicketNumbers
-					System.out.println("\nSorry you never had a chance. None of your numbers even came up at all within the range of tickets you bought.");
-    				System.out.println("However, one of them was eventually drawn, number: [" + winningNumber + "] but it took [" + counter + "] draws and would have cost you: £"+winCost);
+					System.out.println("\n[i] Sorry you never had a chance. None of your numbers even came up at all within the range of tickets you bought.");
+    				System.out.println("[i] However, one of them was eventually drawn, number: [" + winningNumber + "] but it took [" + counter + "] draws and would have cost you: £"+winCost);
 
 					beginDraw = true;
 					return;
