@@ -3,15 +3,9 @@ package ie.gmit.dip;
 import java.util.ArrayList;
 import java.util.Collections;
 
-// Class to generate a random number between 1 and 1000
 public class Random {
 
-//	public static int getBalance() {
-//	int number = (int) ((Math.random() * (1000 - 1)) + 1); // integer value between 1 and 1000
-//	System.out.println("[Random] Random Generated Number: " + number);
-//	return number; 
-//	}
-
+// Generate a random number between 1 and 1000
 	public static int GenerateBankBalanceMaxOneThousand() {
 		int number = (int) ((Math.random() * (1000 - 1)) + 1); // integer value between 1 and 1000
 		System.out.println("[Random] Random Bank Balance: £" + number);
@@ -20,17 +14,19 @@ public class Random {
 	}
 
 	// Generate ticket numbers for the user
-	public static ArrayList<Integer> generateUserTickets(int mAX_RANGE, int ticketQuantity) {
+	public static ArrayList<Integer> generateUserTickets(int maxTickets, int ticketQuantity) {
 		// TODO Auto-generated method stub
 		ArrayList<Integer> numberList = new ArrayList<Integer>(); // Create an ArrayList object
 
 		// for each number within the range
-		for (int i = 1; i <= mAX_RANGE; i++) {
+		for (int i = 1; i <= maxTickets; i++) {
 			// add each number in the list
 			numberList.add(i);
-			// shuffle the numbers
-			Collections.shuffle(numberList);
 		}
+
+		// shuffle the numbers
+		Collections.shuffle(numberList);
+		
 		// For each number in the draw, remove a number until you are left with an amount of random numbers that equal the amount the user has purchased
 		for (int i = 1; i <= numberList.size(); i++) {
 			while (numberList.size() > ticketQuantity) {
@@ -51,25 +47,25 @@ public class Random {
 //			System.out.println(integer);
 //		}
 
-		// Prit the amount of numbers in the collection
+		// Print the amount of numbers in the collection
 		System.out.println("[Number of Tickets Generated] " +numberList.size());
 
 		return numberList;
 	}
 
-	public static int drawNumber(int mAX_RANGE2) {
+	public static int drawNumber(int maxTickets) {
 		// TODO Auto-generated method stub
-		int drawnNumber = (int) ((Math.random() * (mAX_RANGE2 - 1)) + 1);
+		int drawnNumber = (int) ((Math.random() * (maxTickets - 1)) + 1);
 		return drawnNumber;
 
 	}
 
-	public static ArrayList<Integer> generateDrawNumbers(int mAX_RANGE2) {
+	public static ArrayList<Integer> generateDrawNumbers(int maxTickets) {
 		// TODO Auto-generated method stub
 		ArrayList<Integer> draw = new ArrayList<Integer>(); // Create an ArrayList object
 
 		// for each number within the range
-		for (int i = 1; i <= mAX_RANGE2; i++) {
+		for (int i = 1; i <= maxTickets; i++) {
 			// add each number in the list
 			draw.add(i);
 		} 

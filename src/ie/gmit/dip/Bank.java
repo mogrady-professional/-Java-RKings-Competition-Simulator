@@ -54,15 +54,12 @@ public class Bank {
 		// Get the maximum number of tickets the user could purchase with their balance
 		maxBuys = (int) Math.floor(bankBalance / ticketPrice);
 
-		// Define loop control
-
 		System.out.println(ticketQuantity + " tickets cost £" + ticketCost);
 
 		if (ticketCost > currentBalance) {
 			// Rerun loop
-			System.out.println("You have insufficient funds. You can only awford to buy " + maxBuys
+			System.out.println("You have insufficient funds. You can only afford to buy " + maxBuys
 					+ " tickets. Please choose less tickets next time.");
-			return ticketCost;
 		} else {
 			System.out.println("You have sufficient funds to purchase the tickets...");
 		}
