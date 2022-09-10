@@ -37,6 +37,8 @@
 # Package(s) used within the Application
 
 - java.util.Scanner;
+- import java.util.ArrayList;
+- import java.util.Collections;
 
 # System requirements
 
