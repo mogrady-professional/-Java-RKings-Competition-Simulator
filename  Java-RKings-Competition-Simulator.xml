@@ -2,8 +2,8 @@
 <launch4jConfig>
   <dontWrapJar>false</dontWrapJar>
   <headerType>console</headerType>
-  <jar>D:\_Professional\eclipse_workspaces\2022\ Java-RKings-Competition-Simulator\Java-RKings-Competition-Simulator.jar</jar>
-  <outfile>D:\_Professional\eclipse_workspaces\2022\ Java-RKings-Competition-Simulator\Java-RKings-Competition-Simulator.exe</outfile>
+  <jar>C:\Users\Michael\Desktop\Java-RKings-Competition-Simulator.jar</jar>
+  <outfile>C:\Users\Michael\Desktop\RKings-Competition-Simulator.exe</outfile>
   <errTitle></errTitle>
   <cmdLine></cmdLine>
   <chdir>.</chdir>
@@ -13,7 +13,7 @@
   <stayAlive>false</stayAlive>
   <restartOnCrash>false</restartOnCrash>
   <manifest></manifest>
-  <icon>D:\_Professional\eclipse_workspaces\2022\ Java-RKings-Competition-Simulator\images\favicon.ico</icon>
+  <icon>C:\Users\Michael\Desktop\favicon.ico</icon>
   <jre>
     <path></path>
     <bundledJre64Bit>false</bundledJre64Bit>

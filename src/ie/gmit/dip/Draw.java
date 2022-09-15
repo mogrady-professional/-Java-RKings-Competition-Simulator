@@ -178,7 +178,8 @@ public class Draw {
 		
 		System.out.println("Total time (ms): " + (System.currentTimeMillis() - userTicketGenerationTime));
 		try {
-			Thread.sleep(4000);
+			// Sleep for 20 secs
+			Thread.sleep(20000);
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
